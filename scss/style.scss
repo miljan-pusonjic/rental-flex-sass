@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;800&display=swap');
+$fontFamily: 'Montserrat', sans-serif;
+$fontSize: 16px;
+$primary: #2c3e50;
+$secondary: #27ae60;
+$tertiary: #4a9375;
+$accents: #f1c40f;
+$gray: #e9ecef;
+$white: #fff;
+$transition: .3s ease;
+$textShadow: 0 0 2px $primary;
+/******************************
+mixins
+******************************/
+@mixin flex($justify, $align, $direction: row) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+}
+@mixin bgImg( $position: center) {
+    background-position: center $position;
+    background-size: cover;
+}
+/******************************
+basic styles
+******************************/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: $fontFamily;
+    font-size: $fontSize;
+    line-height: 1.6;
+}
+a {
+    text-decoration: none;
+    &:hover {
+        transition: $transition;
+    }
+}
+ul {
+    list-style: none;
+}
+.btn {
+    color: black;
+    background: $accents;
+    text-transform: uppercase;
+    padding: 10px 25px;
+    margin-top: 20px;
+    border: none;
+    font-weight: 400;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    &:hover {
+        color: $white;
+        background: $primary;
+        transition: $transition;
+    }
+}
+/******************************
+nav
+******************************/
+nav {
+    a.logo {
+        background: $primary;
+        display: block;
+        color: $accents;
+        font-size: 1.8rem;
+        font-weight: 400;
+        text-shadow: $textShadow;
+        text-transform: uppercase;
+        padding: 5px 100px;
+        @media(max-width: 767px) {
+            text-align: center;
+        }
+        &:hover {
+            color: rgba($color: $accents, $alpha: .8);
+        }
+    }
+    ul {
+        @include flex(center, center);
+        li {
+            margin: 10px;
+            @media(max-width: 767px) {
+                margin: 5px;
+            }
+            a {
+                color: $secondary;
+                &:hover {
+                    color: $tertiary;
+                }
+            }
+        }
+    }
+}
+/******************************
+header
+******************************/
+header {
+    background-image: url(../img/header.jpg);
+    height: 80vh;
+    @include bgImg();
+    @include flex(center, center);
+    text-align: center;
+    color: $white;
+    hgroup {
+        background: rgba($color: $secondary, $alpha: .7);
+        padding: 30px 50px;
+        text-shadow: $textShadow;
+        @media(max-width: 767px) {
+            padding: 10px;
+        }
+        h1 {
+            font-size: 2rem;
+            @media(max-width: 767px) {
+                font-size: 1.5rem;
+            }
+        }
+        h3 {
+            font-weight: 400;
+        }
+        button {
+            @extend .btn;
+        }
+    }
+}
+
+/******************************
+about
+******************************/
+.about {
+    padding: 100px 70px;
+    background-image:linear-gradient(rgba($color: $tertiary, $alpha: .7), rgba($color: $secondary, $alpha: .7)), url(../img/onama.jpg);
+    background-position: bottom;
+    background-size: cover;
+    text-align: center;
+    color: $white;
+    text-shadow: $textShadow;
+    @media(max-width: 767px) {
+        padding: 20px;
+    }
+    h2 {
+        font-size: 2.5rem;
+    }
+    p {
+        width: 80%;
+        margin: 10px auto;
+        font-size: 1rem;
+        @media(max-width: 767px) {
+            width: 90%;
+        }
+    }
+}
+/******************************
+izdvajamo
+******************************/
+.izdvajamo {
+    @include flex(space-between, center);
+    article {
+        flex: 0 0 25%;
+        background: linear-gradient(to right, $accents, $gray);
+        @media(max-width: 767px) {
+            flex: 0 0 50%;
+        }
+        img {
+            width: 100%;
+            // display: block;
+        }
+        div {
+            text-align: center;
+            color: $white;
+            background: $primary;
+            padding: 10px;
+        }
+        
+    }
+    article:nth-child(even) {
+        div  {
+            background: $secondary;
+        }
+    }
+}
+/******************************
+blog
+******************************/
+.blog {
+    display: flex;
+    flex-wrap: wrap;
+    article {
+        flex: 0 0 50%;
+        height: 50vh;
+        @media(max-width: 767px) {
+            flex: 0 0 100%;
+        }
+        h3 {
+            text-align: center;
+        }
+        p {
+            text-align: justify;
+        }
+    }
+    article:nth-child(2) {
+        background-image: url(../img/benefiti1.jpg);
+        background-position: center;
+        background-size: cover;
+        @media(max-width: 767px) {
+            order: -1;
+        }
+    }
+    article:nth-child(3) {
+        background-image: url(../img/benefiti2.jpg);
+        background-position: center;
+        background-size: cover;
+    }
+    article:nth-child(1),
+    article:nth-child(4) {
+        @include flex(center, center)
+        background: $gray;
+        padding: 20px;
+        @media(max-width: 767px) {
+            padding: 10px;
+            height: auto;
+        }
+    }
+    
+}   
+
+/******************************
+footer
+******************************/
+footer {
+    background-image:linear-gradient(rgba($accents, .7)), url(../img/footer.jpg);
+    @include bgImg();
+    height: 50vh;
+    @include flex(center, center, column);
+    h3 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    p {
+        margin-bottom: 20px;
+        font-size: .9rem;
+    }
+    form {
+        @media(max-width: 767px) {
+            @include flex(space-between, center, column);
+        }
+        input {
+            padding: 10px;
+            @media(max-width: 767px) {
+                margin-bottom: 10px;
+            }
+        }
+        button {
+            position: relative;
+            top: 2px;
+            @extend .btn;
+            background: $primary;
+            color: $white;
+            &:hover {
+                background: $secondary;
+            }
+        }
+    }
+}
